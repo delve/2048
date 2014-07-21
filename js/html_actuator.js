@@ -7,6 +7,53 @@ function HTMLActuator() {
   this.score = 0;
 }
 
+/************************************************************************
+Wikipedia utility function(s)
+/***********************************************************************/
+    function fetchRandom(response) {
+    	response = (response === undefined) ? "" : response;
+    	if(response != "")
+    	{
+        var randvals = {};
+        randvals['url'] = '';
+        randvals['img'] = '';
+        alert(response);
+        return;
+    	}
+			var request = "http://en.wikipedia.org/w/api.php?action=query&format=json&generator=random&prop=images&imlimit=1";
+			var randvals = {};
+			randvals['url'] = '';
+			randvals['img'] = '';
+			var xmlreq = new XMLHttpRequest;
+			alert("entering function");
+			xmlreq.onreadystatechange=function()
+			  {
+			  if (xmlreq.readyState==4 && xmlreq.status==200)
+			    {
+			      alert("response");
+			      alert(xmlreq.responseText);
+			      fetchRandom(xmlreq.responseText);
+			    }
+			  }
+			
+			alert("preping");
+			xmlreq.open("GET",request,true);
+			alert("sending");
+			xmlreq.send();
+			alert("sent");
+			
+			//while(randvals.img == ''){
+			//  xmlreq.open("GET",request,true);
+			//  xmlreq.send();
+			//  alert(xmlreq.responseText);
+			//}
+    }
+
+/************************************************************************
+END Wikipedia utility function(s)
+************************************************************************/
+
+
 HTMLActuator.prototype.actuate = function (grid, metadata) {
   var self = this;
 
@@ -53,6 +100,9 @@ HTMLActuator.prototype.addTile = function (tile) {
   var inner     = document.createElement("div");
   var position  = tile.previousPosition || { x: tile.x, y: tile.y };
   var positionClass = this.positionClass(position);
+  var tileIMG = document.createElement("img");
+  var tileURL = document.createElement("a");
+  var randomWiki = fetchRandom();
 
   // We can't use classlist because it somehow glitches when replacing classes
   var classes = ["tile", "tile-" + tile.value, positionClass];
@@ -62,7 +112,13 @@ HTMLActuator.prototype.addTile = function (tile) {
   this.applyClasses(wrapper, classes);
 
   inner.classList.add("tile-inner");
-  inner.textContent = tile.value;
+
+	tileIMG.src = "style/1.JPG";
+  tileIMG.classList.add("tile-img");
+  tileURL.href="google.com";
+
+  inner.appendChild(tileURL);
+  tileURL.appendChild(tileIMG);
 
   if (tile.previousPosition) {
     // Make sure that the tile gets rendered in the previous position first

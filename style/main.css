@@ -305,6 +305,9 @@ hr {
   -webkit-transition-property: -webkit-transform;
   -moz-transition-property: -moz-transform;
   transition-property: transform; }
+  .tile-img {
+	  width: 100px;
+	  height: 100px;  }  
   .tile .tile-inner {
     border-radius: 3px;
     background: #eee4da;
