@@ -25,7 +25,6 @@ function fetchRandom(response) {
     randvals['url'] = '';
     randvals['img'] = '';
     var xmlreq = new XMLHttpRequest;
-    alert("entering function");
     xmlreq.onreadystatechange=function()
     {
         if (xmlreq.readyState==4 && xmlreq.status==200)
@@ -36,11 +35,8 @@ function fetchRandom(response) {
         }
     }
 
-    alert("preping");
     xmlreq.open("GET",request,true);
-    alert("sending");
     xmlreq.send();
-    alert("sent");
 
     /*while(randvals.img == ''){
         xmlreq.open("GET",request,true);
