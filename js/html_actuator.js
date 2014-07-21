@@ -10,44 +10,44 @@ function HTMLActuator() {
 /************************************************************************
 Wikipedia utility function(s)
 /***********************************************************************/
-    function fetchRandom(response) {
-    	response = (response === undefined) ? "" : response;
-    	if(response != "")
-    	{
+function fetchRandom(response) {
+    response = (response === undefined) ? "" : response;
+    if(response != "")
+    {
         var randvals = {};
         randvals['url'] = '';
         randvals['img'] = '';
         alert(response);
         return;
-    	}
-			var request = "http://en.wikipedia.org/w/api.php?action=query&format=json&generator=random&prop=images&imlimit=1";
-			var randvals = {};
-			randvals['url'] = '';
-			randvals['img'] = '';
-			var xmlreq = new XMLHttpRequest;
-			alert("entering function");
-			xmlreq.onreadystatechange=function()
-			  {
-			  if (xmlreq.readyState==4 && xmlreq.status==200)
-			    {
-			      alert("response");
-			      alert(xmlreq.responseText);
-			      fetchRandom(xmlreq.responseText);
-			    }
-			  }
-			
-			alert("preping");
-			xmlreq.open("GET",request,true);
-			alert("sending");
-			xmlreq.send();
-			alert("sent");
-			
-			//while(randvals.img == ''){
-			//  xmlreq.open("GET",request,true);
-			//  xmlreq.send();
-			//  alert(xmlreq.responseText);
-			//}
     }
+    var request = "http://en.wikipedia.org/w/api.php?action=query&format=json&generator=random&prop=images&imlimit=1";
+    var randvals = {};
+    randvals['url'] = '';
+    randvals['img'] = '';
+    var xmlreq = new XMLHttpRequest;
+    alert("entering function");
+    xmlreq.onreadystatechange=function()
+    {
+        if (xmlreq.readyState==4 && xmlreq.status==200)
+        {
+            alert("response");
+            alert(xmlreq.responseText);
+            fetchRandom(xmlreq.responseText);
+        }
+    }
+
+    alert("preping");
+    xmlreq.open("GET",request,true);
+    alert("sending");
+    xmlreq.send();
+    alert("sent");
+
+    /*while(randvals.img == ''){
+        xmlreq.open("GET",request,true);
+        xmlreq.send();
+        alert(xmlreq.responseText);
+    }*/
+}
 
 /************************************************************************
 END Wikipedia utility function(s)
