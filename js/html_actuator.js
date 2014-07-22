@@ -20,7 +20,7 @@ function fetchRandom(response) {
         alert(response);
         return;
     }
-    var request = "http://en.wikipedia.org/w/api.php?action=query&format=json&generator=random&prop=images&imlimit=1";
+    var request = "http://en.wikipedia.org/w/api.php?action=query&format=xml&generator=random&prop=images|info&imlimit=1&grnnamespace=0&inprop=url";
     var randvals = {};
     randvals['url'] = '';
     randvals['img'] = '';
