@@ -47,7 +47,6 @@ Wikipedia utility function(s)
 
 var WikipediaCORS=
     {
-    var _this=this;
     setMessage:function(msg)
         {
             alert(msg);
@@ -79,6 +78,7 @@ var WikipediaCORS=
         },
     init:function()
         {
+        var _this=this;
 //var request = "http://en.wikipedia.org/w/api.php?action=query&format=xml&generator=random&prop=images|info&imlimit=1&grnnamespace=0&inprop=url";
         var url = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=Javascript&format=json';
         var xhr = this.createCORSRequest(url);
@@ -153,7 +153,7 @@ HTMLActuator.prototype.addTile = function (tile) {
   var tileIMG = document.createElement("img");
   var tileURL = document.createElement("a");
 //  var randomWiki = fetchRandom();
-  var randomWiki = new WikipediaCORS.init();
+  var randomWiki = Object.create(WikipediaCORS);
 
   // We can't use classlist because it somehow glitches when replacing classes
   var classes = ["tile", "tile-" + tile.value, positionClass];
