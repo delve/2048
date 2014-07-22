@@ -153,7 +153,7 @@ HTMLActuator.prototype.addTile = function (tile) {
   var tileIMG = document.createElement("img");
   var tileURL = document.createElement("a");
 //  var randomWiki = fetchRandom();
-  var randomWiki = Object.create(WikipediaCORS);
+  var randomWiki = WikipediaCORS.create();
 
   // We can't use classlist because it somehow glitches when replacing classes
   var classes = ["tile", "tile-" + tile.value, positionClass];
