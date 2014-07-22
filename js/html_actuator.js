@@ -10,41 +10,95 @@ function HTMLActuator() {
 /************************************************************************
 Wikipedia utility function(s)
 /***********************************************************************/
-function fetchRandom(response) {
-    response = (response === undefined) ? "" : response;
-    if(response != "")
+//function fetchRandom(response) {
+//    response = (response === undefined) ? "" : response;
+//    if(response != "")
+//    {
+//        var randvals = {};
+//        randvals['url'] = '';
+//        randvals['img'] = '';
+//        alert(response);
+//        return;
+//    }
+//    var request = "http://en.wikipedia.org/w/api.php?action=query&format=xml&generator=random&prop=images|info&imlimit=1&grnnamespace=0&inprop=url";
+//    var randvals = {};
+//    randvals['url'] = '';
+//    randvals['img'] = '';
+//    var xmlreq = new XMLHttpRequest;
+//    xmlreq.onreadystatechange=function()
+//    {
+//        if (xmlreq.readyState==4 && xmlreq.status==200)
+//        {
+//            alert("response");
+//            alert(xmlreq.responseText);
+//            fetchRandom(xmlreq.responseText);
+//        }
+//    }
+//
+//    xmlreq.open("GET",request,true);
+//    xmlreq.send();
+//
+//    /*while(randvals.img == ''){
+//        xmlreq.open("GET",request,true);
+//        xmlreq.send();
+//        alert(xmlreq.responseText);
+//    }*/
+//}
+
+var WikipediaCORS=
     {
-        var randvals = {};
-        randvals['url'] = '';
-        randvals['img'] = '';
-        alert(response);
-        return;
-    }
-    var request = "http://en.wikipedia.org/w/api.php?action=query&format=xml&generator=random&prop=images|info&imlimit=1&grnnamespace=0&inprop=url";
-    var randvals = {};
-    randvals['url'] = '';
-    randvals['img'] = '';
-    var xmlreq = new XMLHttpRequest;
-    xmlreq.onreadystatechange=function()
-    {
-        if (xmlreq.readyState==4 && xmlreq.status==200)
+    setMessage:function(msg)
         {
-            alert("response");
-            alert(xmlreq.responseText);
-            fetchRandom(xmlreq.responseText);
+            alert(msg);
+        },
+    // Create the XHR object.
+    createCORSRequest:function(url)
+        {
+        var xhr = new XMLHttpRequest();
+
+
+        if ("withCredentials" in xhr)
+            {
+            xhr.open("GET", url, true);
+            }
+        else if (typeof XDomainRequest != "undefined")
+            {
+            xhr = new XDomainRequest();
+            xhr.open(method, url);
+            }
+        else
+            {
+            return null;
+            }
+          xhr.setRequestHeader("Origin", "http://www.yourpage.com");
+          xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+//        xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
+//        xhr.setRequestHeader("Access-Control-Allow-Origin","*");
+        return xhr;
+        },
+    init:function()
+        {
+        var _this=this;
+//var request = "http://en.wikipedia.org/w/api.php?action=query&format=xml&generator=random&prop=images|info&imlimit=1&grnnamespace=0&inprop=url";
+        var url = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=Javascript&format=json';
+        var xhr = this.createCORSRequest(url);
+        if (!xhr)
+            {
+                this.setMessage('CORS not supported');
+                return;
+            }
+
+        xhr.onload = function()
+            {
+                _this.setMessage(xhr.responseText);
+            };
+        xhr.onerror = function()
+            {
+                _this.setMessage('Woops, there was an error making the request.');
+            };
+        xhr.send();
         }
-    }
-
-    xmlreq.open("GET",request,true);
-    xmlreq.send();
-
-    /*while(randvals.img == ''){
-        xmlreq.open("GET",request,true);
-        xmlreq.send();
-        alert(xmlreq.responseText);
-    }*/
-}
-
+    };
 /************************************************************************
 END Wikipedia utility function(s)
 ************************************************************************/
