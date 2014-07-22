@@ -70,7 +70,7 @@ var WikipediaCORS=
             {
             return null;
             }
-          xhr.setRequestHeader("Origin", "http://www.yourpage.com");
+          xhr.setRequestHeader("Origin", "http://delve.github.io");
           xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
 //        xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
 //        xhr.setRequestHeader("Access-Control-Allow-Origin","*");
